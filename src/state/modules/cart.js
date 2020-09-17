@@ -20,43 +20,35 @@ export const mutations = {
 
 export const actions = {
   init({ state, dispatch }) {
-    dispatch('getCart');
+    dispatch("getCart");
   },
 
-  setProductCart(
-    { commit, dispatch, getters },
-    { id_product, quantity } = {}
-  ) {
+  setProductCart({ commit, dispatch, getters }, { id_product, quantity } = {}) {
     return axios
       .post(environment.CART_URL, {
         id_product,
-        quantity
+        quantity,
       })
       .then((res) => {
-        dispatch('getCart');
+        dispatch("getCart");
         return res.data;
       });
   },
 
   // Logs in the current user.
   getCart({ commit, dispatch, getters }) {
-    return axios
-      .get(environment.CART_URL)
-      .then((res) => {
-        commit('setCart', res.data.cart);
-        return res.data.cart;
-      });
+    return axios.get(environment.CART_URL).then((res) => {
+      commit("setCart", res.data.cart);
+      return res.data.cart;
+    });
   },
 
   // Logs out the current user.
   clearCart({ commit, dispatch }) {
-    return axios
-      .delete(environment.CART_URL)
-      .then((res) => {
-        commit('setCart', []);
-        dispatch('getCart')
-        return res;
-      });
+    return axios.delete(environment.CART_URL).then((res) => {
+      commit("setCart", []);
+      dispatch("getCart");
+      return res;
+    });
   },
 };
-

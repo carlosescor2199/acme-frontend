@@ -24,6 +24,7 @@ export default {
     ...cartMethods,
     ...paymentsMethods,
     async onGetCart() {
+      this.getCart();
       this.shoppingCart = this.cart;
     },
     async onClearCart() {

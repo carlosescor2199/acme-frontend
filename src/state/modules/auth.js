@@ -43,10 +43,12 @@ export const actions = {
         confirmPassword,
       })
       .then((res) => {
-        if (res.data.token) {
-          const token = res.data.token;
-          commit("setCurrentUser", token);
-          return token;
+        if (res.data) {
+          if(res.data.token){
+            const token = res.data.token;
+            commit("setCurrentUser", token);
+          }
+          
         }
         return res.data;
       });
